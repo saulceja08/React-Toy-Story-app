@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ToyCard from './ToyCard';
+import HeaderComponent from './HeaderComponent';
 
 const MainComponent = () => {
   const [toys, setToys] = useState([]);
@@ -41,8 +42,28 @@ const MainComponent = () => {
     toy.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleAddToy = (newToy) => {
+    // Perform the POST request to add the new toy to the server
+    fetch('https://saulceja08-flatiron-phase-2-json-server.onrender.com/toys', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newToy),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Update the state with the new toy that includes the assigned id from the server
+        setToys((prevToys) => [...prevToys, { ...newToy, id: data.id, isLiked: false }]);
+      })
+      .catch((error) => {
+        console.error('Error adding toy:', error);
+      });
+  };
+
   return (
     <div className="ToyStoryBackground">
+      <HeaderComponent onAddToy={handleAddToy} />
       <div className="search-container">
         <input type="text" placeholder="Search by name..." value={searchTerm} onChange={handleSearch} />
       </div>
