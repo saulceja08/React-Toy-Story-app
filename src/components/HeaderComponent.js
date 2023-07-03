@@ -23,21 +23,18 @@ const HeaderComponent = ({ onAddToy }) => {
     };
   
     return (
-      <div className="header">
+        <div className="header">
         <h1 className="toy-story-theme">Toy Story Forum</h1>
         {isFormOpen ? (
-          <form onSubmit={handleSubmit}>
-            <label>
-              Name:
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-            </label>
-            <label>
-              Image URL:
-              <input type="text" value={image} onChange={(e) => setImage(e.target.value)} />
-            </label>
-            <button type="submit">Add Toy</button>
-            <button onClick={() => setIsFormOpen(false)}>Cancel</button>
-          </form>
+          <div className="form-container">
+            <form onSubmit={handleSubmit}>
+              {/* ... (existing form elements) */}
+              <div className="button-container">
+                <button type="submit">Add Toy</button>
+                <button onClick={() => setIsFormOpen(false)}>Cancel</button>
+              </div>
+            </form>
+          </div>
         ) : (
           <button onClick={() => setIsFormOpen(true)}>Add Toy</button>
         )}
