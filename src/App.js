@@ -3,7 +3,7 @@ import MainComponent from "./components/MainComponent";
 
 function App() {
   return (
-    <div className="App">
+    <div className="ToyStoryBackground">
       <HeaderComponent />
       <MainComponent />
     </div>

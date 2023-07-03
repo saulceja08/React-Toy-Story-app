@@ -42,3 +42,17 @@ p {
   margin: 8px 0;
 }
 
+/* MainComponent.css */
+.ToyStoryBackground {
+  background-image: url('/Users/saulceja/Development/Code/phase-2/flatiron-phase-2-project/src/ToyStoryBackground.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  color: #00000; /* Set font color to white for better readability */
+}
