@@ -131,3 +131,16 @@ li {
 .delete-button:hover {
   background-color: #cc0000; /* Darker red color on hover */
 }
+
+
+/* MainComponent.css */
+h1 {
+  font-family: "Georgia", 'Courier New', Courier, monospace;
+  font-size: 32px;
+  color: #FFD700; /* Gold/yellow color for the text */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 2px #000000; /* Add a subtle text shadow */
+  margin: 20px 0;
+  text-align: center;
+}

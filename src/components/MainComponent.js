@@ -81,7 +81,7 @@ const MainComponent = () => {
       <div className="search-container">
         <input type="text" placeholder="Search by name..." value={searchTerm} onChange={handleSearch} />
       </div>
-      <h1>Toys</h1>
+      <h1>Toy Story Characters</h1>
       <ul>
         {filteredToys.map((toy) => (
           <ToyCard
