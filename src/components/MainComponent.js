@@ -3,7 +3,7 @@ import ToyCard from './ToyCard';
 import HeaderComponent from './HeaderComponent';
 
 const MainComponent = () => {
-  const [toys, setToys] = useState([]); // Add this line for 'setToys'
+  const [toys, setToys] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -15,7 +15,6 @@ const MainComponent = () => {
         return response.json();
       })
       .then((data) => {
-        // Add the isLiked property to each toy, initialized to false
         const toysWithLikeStatus = data.map((toy) => ({ ...toy, isLiked: false }));
         setToys(toysWithLikeStatus);
       })
@@ -38,12 +37,7 @@ const MainComponent = () => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredToys = toys.filter((toy) =>
-    toy.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   const handleAddToy = (newToy) => {
-    // Perform the POST request to add the new toy to the server
     fetch('https://saulceja08-flatiron-phase-2-json-server.onrender.com/toys', {
       method: 'POST',
       headers: {
@@ -53,7 +47,6 @@ const MainComponent = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Update the state with the new toy that includes the assigned id from the server
         setToys((prevToys) => [...prevToys, { ...newToy, id: data.id, isLiked: false }]);
       })
       .catch((error) => {
@@ -62,18 +55,21 @@ const MainComponent = () => {
   };
 
   const handleDeleteToy = (id) => {
-    // Perform the DELETE request to remove the toy from the server
     fetch(`https://saulceja08-flatiron-phase-2-json-server.onrender.com/toys/${id}`, {
       method: 'DELETE',
     })
       .then(() => {
-        // Update the state to remove the deleted toy
         setToys((prevToys) => prevToys.filter((toy) => toy.id !== id));
       })
       .catch((error) => {
         console.error('Error deleting toy:', error);
       });
   };
+
+  // Move the filtering inside the render
+  const filteredToys = toys.filter((toy) =>
+    toy.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="ToyStoryBackground">
