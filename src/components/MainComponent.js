@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-
+import ToyCard from './ToyCard';
 
 const MainComponent = () => {
   const [toys, setToys] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetch('https://saulceja08-flatiron-phase-2-json-server.onrender.com/toys')
@@ -21,7 +22,6 @@ const MainComponent = () => {
         console.error('Error fetching data:', error);
       });
   }, []);
-  
 
   const handleLikeClick = (id) => {
     setToys((prevToys) =>
@@ -33,19 +33,23 @@ const MainComponent = () => {
     );
   };
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredToys = toys.filter((toy) =>
+    toy.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div>
+    <div className="ToyStoryBackground">
+      <div className="search-container">
+        <input type="text" placeholder="Search by name..." value={searchTerm} onChange={handleSearch} />
+      </div>
       <h1>Toys</h1>
       <ul>
-        {toys.map((toy) => (
-          <li key={toy.id}>
-            <img src={toy.image} alt={toy.name} />
-            <h3>{toy.name}</h3>
-            <p>
-              Likes: {toy.likes}{' '}
-              <button onClick={() => handleLikeClick(toy.id)}>{toy.isLiked ? 'Unlike' : 'Like'}</button>
-            </p>
-          </li>
+        {filteredToys.map((toy) => (
+          <ToyCard key={toy.id} toy={toy} onLikeClick={handleLikeClick} />
         ))}
       </ul>
     </div>
