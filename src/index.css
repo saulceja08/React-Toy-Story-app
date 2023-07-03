@@ -58,7 +58,7 @@ p {
 }
 
 .toy-story-theme {
-  font-family: "Bangers", cursive;
+  font-family: "Georgia", 'Courier New', Courier, monospace;
   font-size: 48px;
   color: #FFD700; /* Gold/yellow color for the text */
   text-transform: uppercase;
