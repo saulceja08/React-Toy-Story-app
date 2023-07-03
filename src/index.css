@@ -56,3 +56,15 @@ p {
   font-family: Arial, sans-serif;
   color: #000; /* Set font color to white for better readability */
 }
+
+.toy-story-theme {
+  font-family: "Bangers", cursive;
+  font-size: 48px;
+  color: #FFD700; /* Gold/yellow color for the text */
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 2px #000000; /* Add a subtle text shadow */
+  margin: 100px auto;
+  text-align: center;
+  position: relative;
+}
