@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-function HeaderComponent() {
+const HeaderComponent = ({ searchTerm, onSearchChange }) => {
   return (
-    <div>
-        <h2>Toy Story Forum</h2>
+    <div className="header">
+      <h1>Toy Story Forum</h1>
     </div>
-  )
-}
+  );
+};
 
-export default HeaderComponent
+export default HeaderComponent;
