@@ -1,3 +1,4 @@
+import React from 'react';
 import HeaderComponent from "./components/HeaderComponent";
 import MainComponent from "./components/MainComponent";
 

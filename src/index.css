@@ -44,7 +44,8 @@ p {
 
 /* MainComponent.css */
 .ToyStoryBackground {
-  background-image: url('/Users/saulceja/Development/Code/phase-2/flatiron-phase-2-project/src/ToyStoryBackground.jpg');
+  background-image: url('./ToyStoryBackground.jpg'); /* Use relative path */
+  /* Rest of the styles remain unchanged */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
