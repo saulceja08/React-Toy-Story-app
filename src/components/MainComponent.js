@@ -1,27 +1,37 @@
 import React, { useState, useEffect } from 'react';
 
+
 const MainComponent = () => {
   const [toys, setToys] = useState([]);
 
   useEffect(() => {
-    // Fetch data from the API URL
     fetch('https://saulceja08-flatiron-phase-2-json-server.onrender.com/toys')
       .then((response) => {
-        // Check if the response is successful
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        // Parse the response as JSON
         return response.json();
       })
       .then((data) => {
-        // Update the state with the fetched data
-        setToys(data);
+        // Add the isLiked property to each toy, initialized to false
+        const toysWithLikeStatus = data.map((toy) => ({ ...toy, isLiked: false }));
+        setToys(toysWithLikeStatus);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, []);
+  
+
+  const handleLikeClick = (id) => {
+    setToys((prevToys) =>
+      prevToys.map((toy) =>
+        toy.id === id
+          ? { ...toy, likes: toy.isLiked ? toy.likes - 1 : toy.likes + 1, isLiked: !toy.isLiked }
+          : toy
+      )
+    );
+  };
 
   return (
     <div>
@@ -31,7 +41,10 @@ const MainComponent = () => {
           <li key={toy.id}>
             <img src={toy.image} alt={toy.name} />
             <h3>{toy.name}</h3>
-            <p>Likes: {toy.likes}</p>
+            <p>
+              Likes: {toy.likes}{' '}
+              <button onClick={() => handleLikeClick(toy.id)}>{toy.isLiked ? 'Unlike' : 'Like'}</button>
+            </p>
           </li>
         ))}
       </ul>
