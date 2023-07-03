@@ -3,7 +3,7 @@ import ToyCard from './ToyCard';
 import HeaderComponent from './HeaderComponent';
 
 const MainComponent = () => {
-  const [toys, setToys] = useState([]);
+  const [toys, setToys] = useState([]); // Add this line for 'setToys'
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -61,6 +61,20 @@ const MainComponent = () => {
       });
   };
 
+  const handleDeleteToy = (id) => {
+    // Perform the DELETE request to remove the toy from the server
+    fetch(`https://saulceja08-flatiron-phase-2-json-server.onrender.com/toys/${id}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        // Update the state to remove the deleted toy
+        setToys((prevToys) => prevToys.filter((toy) => toy.id !== id));
+      })
+      .catch((error) => {
+        console.error('Error deleting toy:', error);
+      });
+  };
+
   return (
     <div className="ToyStoryBackground">
       <HeaderComponent onAddToy={handleAddToy} />
@@ -70,7 +84,12 @@ const MainComponent = () => {
       <h1>Toys</h1>
       <ul>
         {filteredToys.map((toy) => (
-          <ToyCard key={toy.id} toy={toy} onLikeClick={handleLikeClick} />
+          <ToyCard
+            key={toy.id}
+            toy={toy}
+            onLikeClick={handleLikeClick}
+            onDeleteClick={handleDeleteToy}
+          />
         ))}
       </ul>
     </div>
